@@ -15,7 +15,7 @@
     (click)="resolve(status.Resolved)"
   >
     <img src="../../../../assets/icons/i-did-it-mark.svg" />
-    I did it
+    {{ getResolveName() }}
   </button>
 
   <ng-template #statusMarker>
