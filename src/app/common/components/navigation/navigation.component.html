@@ -8,9 +8,6 @@
       <li routerLinkActive="tc-nav-active">
         <a [routerLink]="['/assistant']">Chat with AI</a>
       </li>
-      <li routerLinkActive="tc-nav-active">
-        <a [routerLink]="['/stats']">Statistics</a>
-      </li>
     </ul>
     <button
       *ngIf="(userRole$ | async) !== 'guest'"
@@ -24,12 +21,6 @@
 
   <nav class="tc-nav-link-list" *tcShowAuth="userRole$ | async">
     <ul>
-      <li routerLinkActive="tc-nav-active">
-        <a [routerLink]="['/stats']">
-          <img class="tc-nav-icon" src="../../../../assets/stat.svg" />
-          Statistics
-        </a>
-      </li>
       <li routerLinkActive="tc-nav-active">
         <a [routerLink]="['/tasks']">
           <img class="tc-nav-icon" src="../../../../assets/task-list.svg" />
