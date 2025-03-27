@@ -10,7 +10,7 @@ import { AuthService } from '../../common/services/auth.service';
   styleUrls: ['./about.component.scss'],
 })
 export class AboutComponent implements OnDestroy {
-  isAuth = false;
+  isAuth = true;
   private subscription: Subscription;
 
   constructor(
@@ -19,6 +19,9 @@ export class AboutComponent implements OnDestroy {
   ) {
     this.subscription = this.authService.isAuthenticated().subscribe((isAuth) => {
       this.isAuth = isAuth;
+      if (isAuth) {
+        this.router.navigate(['/tasks']);
+      }
     });
   }
 
