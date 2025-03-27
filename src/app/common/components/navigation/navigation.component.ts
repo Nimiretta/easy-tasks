@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { LogoComponent } from './logo/logo.component';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
   standalone: true,
-  imports: [LogoComponent, RouterModule, CommonModule, ShowAuthDirective],
+  imports: [LogoComponent, RouterModule, CommonModule, ShowAuthDirective, NgOptimizedImage],
 })
 export class NavigationComponent {
   userRole$: Observable<UserRole>;

@@ -9,14 +9,25 @@
         <a [routerLink]="['/assistant']">Chat with AI</a>
       </li>
     </ul>
-    <button
-      *ngIf="(userRole$ | async) !== 'guest'"
-      class="tc-nav-logout"
-      type="button"
-      (click)="logOut()"
-    >
-      Log out
-    </button>
+
+    <div class="tc-nav-right">
+      <a [href]="'https://t.me/EasyGoTasks_Bot'" class="tc-nav-tg">
+        <img
+          ngSrc="./assets/telegram-logo.svg"
+          width="30"
+          height="30"
+          alt="telegram"
+        />
+      </a>
+      <button
+        *ngIf="(userRole$ | async) !== 'guest'"
+        class="tc-nav-logout"
+        type="button"
+        (click)="logOut()"
+      >
+        Log out
+      </button>
+    </div>
   </nav>
 
   <nav class="tc-nav-link-list" *tcShowAuth="userRole$ | async">
