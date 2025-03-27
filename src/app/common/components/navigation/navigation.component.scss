@@ -9,6 +9,7 @@
 
   .tc-nav-link-list-desk {
     display: none;
+    margin-left: 1rem;
   }
 
   a {
@@ -16,7 +17,25 @@
     color: inherit;
   }
 
+  .tc-nav-tg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+  }
+
+  .tc-nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
   @media only screen and (min-width: 768px) {
+    .tc-nav-tg {
+      margin-left: auto;
+    }
+
     .tc-nav-link-list-desk {
       list-style: none;
       padding-left: 0;
@@ -88,6 +107,7 @@
   border: 1px $primary-dark solid;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
+  white-space: nowrap;
 }
 
 .tc-nav-logout:hover {
