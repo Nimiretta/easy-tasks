@@ -1,4 +1,4 @@
-<div class="tc-about-main">
+<div class="tc-about-main" *ngIf="!isAuth">
   <div>
     <h1 class="tc-about-heading">
       <span class="tc-about-accent">Free your mind</span> from nagging tasks
@@ -12,11 +12,8 @@
       T-TrashCan!
     </p>
   </div>
-  <div class="tc-about-buttons" *ngIf="!isAuth">
+  <div class="tc-about-buttons">
     <a [routerLink]="['/auth/sign-up']" class="tc-about-bt"> Register </a>
     <a [routerLink]="['/auth/sign-in']" class="tc-about-bt"> Login </a>
-  </div>
-  <div class="tc-about-buttons" *ngIf="isAuth">
-    <a [routerLink]="['/tasks']" class="tc-about-bt"> Go to tasks </a>
   </div>
 </div>
