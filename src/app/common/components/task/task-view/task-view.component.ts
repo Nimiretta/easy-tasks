@@ -14,6 +14,7 @@ import { ResolveButtonsComponent } from '../../resolve-buttons/resolve-buttons.c
 })
 export class TaskViewComponent {
   @Input() task!: Task;
+  @Input() page!: string;
   @Output() resolve = new EventEmitter<TaskStatus.Resolved | TaskStatus.Rejected>();
   @Output() edit = new EventEmitter<void>();
 

@@ -12,11 +12,16 @@ import { TaskStatus } from '../../../models/task.model';
 })
 export class ResolveButtonsComponent {
   @Input() taskStatus!: TaskStatus;
+  @Input() page: string = 'tasks';
   @Output() resolveEvent: EventEmitter<Exclude<TaskStatus, TaskStatus.Created>> = new EventEmitter();
 
   status = TaskStatus;
 
   resolve(value: Exclude<TaskStatus, TaskStatus.Created>): void {
     this.resolveEvent.emit(value);
+  }
+
+  getResolveName(): string {
+    return this.page === 'assistant' ? 'Promise' : 'I did it';
   }
 }

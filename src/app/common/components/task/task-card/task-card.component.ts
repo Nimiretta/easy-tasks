@@ -15,6 +15,7 @@ import { TaskViewComponent } from '../task-view/task-view.component';
 })
 export class TaskCardComponent {
   @Input() task!: Task;
+  @Input() page!: string;
   @Output() resolve = new EventEmitter<Task>();
   private ngUnsubscribe$ = new Subject<void>();
 
