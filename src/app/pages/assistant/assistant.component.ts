@@ -6,6 +6,7 @@ import { UserService } from '../../common/services/user.service';
 import { Message, ParsedMessage } from '../../models/message.model';
 import { UserRole } from '../../models/user-role.model';
 import { AssistantService } from './service/assistant.service';
+import { SpinnerService } from '../../common/services/spinner.service';
 
 @Component({
   selector: 'tc-assistant',
@@ -27,7 +28,8 @@ export class AssistantComponent implements OnDestroy, AfterViewChecked {
   constructor(
     private userService: UserService,
     private assistantService: AssistantService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private spinnerService: SpinnerService,
   ) {
     this.messages = this.messageService.messages$;
     this.userRole$ = this.userService.userRole$;
@@ -71,12 +73,14 @@ export class AssistantComponent implements OnDestroy, AfterViewChecked {
   }
 
   sendMessage(message: Message): void {
+    this.spinnerService.showSpinner()
     this.messageService.addNewMessage(message);
     this.assistantService
       .getSuggestion(this.messageService.getMessages())
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe((message) => {
         this.messageService.addNewMessage({ content: message, role: 'assistant' });
+        this.spinnerService.hideSpinner();
         this.scrollToBottom();
       });
   }
