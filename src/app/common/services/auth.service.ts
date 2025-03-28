@@ -31,8 +31,8 @@ export class AuthService {
   signIn(credentials: { email: string; password: string }) {
     this.deleteAllCookies();
     return this.http.post(this.apiUrl + endpoints.GET_TOKEN, credentials).pipe(
-      tap((response: { role: UserRole }) => {
-        this.userService.updateUserRole(response.role);
+      tap((response: never) => {
+        // this.userService.updateUserRole(response.role);
       })
     );
   }
@@ -41,23 +41,28 @@ export class AuthService {
   signUp(userInfo) {
     this.deleteAllCookies();
     return this.http.post(this.apiUrl + endpoints.SIGN_UP, userInfo).pipe(
-      tap((response: { role: UserRole }) => {
-        this.userService.updateUserRole(response.role);
+      tap((response: never) => {
+        // this.userService.updateUserRole(response.role);
       })
     );
   }
 
   isAuthenticated(): Observable<boolean> {
-    return this.http.get<{ valid: boolean; role: UserRole }>(this.apiUrl + '/validate').pipe(
-      tap((response: { valid: boolean; role: UserRole }) => {
-        this.userService.updateUserRole(response.role);
+    return this.http.post<{ valid: boolean; role: UserRole }>(this.apiUrl + '/validate/', {
+        access: localStorage.getItem('userToken'),
+        refresh: localStorage.getItem('refresh'),
+      })
+      .pipe(
+      tap((response: any) => {
+        if (response.access) {
+          localStorage.setItem('userToken', response.access);
+        }
       }),
       map((response) => {
-        console.log(response);
-        return response.valid;
+        return true;
       }),
       catchError((error) => {
-        console.error('Validation failed', error);
+        console.error('Validation failed', error.detail);
         return of(false);
       })
     );

@@ -15,11 +15,7 @@ import { Task } from '../../../models/task.model';
 export class TasksComponent implements OnInit {
   tasks$!: Observable<Task[]>;
   combinedQuery$ = this.queryService.combined$;
-  currentPage$ = this.queryService.currentPage$;
   cardView = true;
-
-  loadMoreShowSubject = new BehaviorSubject(false);
-  loadMoreShow$ = this.loadMoreShowSubject.asObservable();
 
   constructor(
     private taskService: TaskService,
@@ -36,17 +32,11 @@ export class TasksComponent implements OnInit {
     this.tasks$ = this.combinedQuery$.pipe(
       switchMap(([_refresh, ...rest]) => {
         this.spinnerService.showSpinner();
-        return this.taskService.getTasks(...rest);
+        const [search, filters] = rest;
+        return this.taskService.getTasks(filters, search);
       }),
-      tap(() => {
-        if (
-          this.queryService.getTotalPages() === this.queryService.getCurrentPage() ||
-          this.queryService.getTotalPages() === 0
-        ) {
-          this.loadMoreShowSubject.next(false);
-        } else {
-          this.loadMoreShowSubject.next(true);
-        }
+      tap((data) => {
+        console.log(data);
       }),
       delay(300),
       tap(() => {
@@ -69,10 +59,5 @@ export class TasksComponent implements OnInit {
 
   onViewChange(): void {
     this.cardView = !this.cardView;
-  }
-
-  onLoadMore(): void {
-    this.queryService.updatePagination();
-    this.queryService.refreshQuery();
   }
 }

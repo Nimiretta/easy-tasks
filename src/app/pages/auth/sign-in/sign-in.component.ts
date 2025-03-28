@@ -31,8 +31,9 @@ export class SignInComponent {
     if (this.signInForm.valid) {
       this.spinnerService.showSpinner();
       this.authService.signIn(this.signInForm.value).subscribe({
-        next: (data: { role: UserRole; token: string }) => {
-          localStorage.setItem('userToken', data.token);
+        next: (data: { access: string; refresh: string }) => {
+          localStorage.setItem('userToken', data.access);
+          localStorage.setItem('refresh', data.refresh);
           try {
             this.router.navigate(['/tasks']);
             this.spinnerService.hideSpinner();

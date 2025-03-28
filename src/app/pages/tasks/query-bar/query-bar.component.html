@@ -1,18 +1,4 @@
 <div class="tc-query-container">
-  <div class="tc-query-sort">
-    <label class="tc-query-label">Sort by</label>
-    <div class="tc-query-sort-select">
-      <mat-select
-        [value]="sortSelected$ | async"
-        (selectionChange)="onSortChange($event.value)"
-      >
-        <mat-option *ngFor="let option of sortOptions" [value]="option.apiName">
-          {{ option.displayName }}
-        </mat-option>
-      </mat-select>
-    </div>
-  </div>
-
   <div class="tc-query-search">
     <label class="tc-query-label">Search</label>
     <input

@@ -17,32 +17,19 @@ export class TaskService {
   ) {}
 
   getTasks(
-    search?: string,
     filter: TaskStatus[] = [TaskStatus.Created],
-    sort?: string,
-    pagination?: number
+    search?: string
   ): Observable<Task[]> {
     const params = new URLSearchParams();
     params.append('filter', filter.join(','));
-
-    if (sort) {
-      params.append('sort', sort);
-    }
 
     if (search) {
       params.append('search', search);
     }
 
-    if (pagination) {
-      params.append('p', pagination.toString());
-    }
-
-    return this.http.get<{ paginationAmount: number; tasks: Task[] }>(this.apiUrl + `?${params.toString()}`).pipe(
-      tap((r) => {
-        return this.queryService.updatePaginationTotal(+r.paginationAmount);
-      }),
-      map((r) => r.tasks),
-      map((tasks) => tasks.map(Task.fromJSON))
+    return this.http.get<{ paginationAmount: number; results: Task[] }>(this.apiUrl + `?${params.toString()}`).pipe(
+      map((r) => r.results),
+      map((results) => results.map(Task.fromJSON))
     );
   }
 
