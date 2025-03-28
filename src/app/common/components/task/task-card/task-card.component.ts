@@ -37,7 +37,4 @@ export class TaskCardComponent {
   onEdit(): void {
     this.router.navigate(['/editor/', this.task.taskId]);
   }
-
-  // TODO
-  // onDestroy()
 }
