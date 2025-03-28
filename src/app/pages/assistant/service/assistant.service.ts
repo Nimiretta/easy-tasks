@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
 import { environment } from '../../../../environments/enviroment';
 import { Message } from '../../../models/message.model';
@@ -12,8 +12,12 @@ export class AssistantService {
   constructor(private http: HttpClient) {}
 
   //uncomment when want real data
-  getSuggestion(message: Message[]): Observable<string> {
-    return this.http.post<string>(this.apiUrl, message[message.length - 1].content);
+  getSuggestion(message: Message[]): Observable<any> {
+    return this.http.post<any>(this.apiUrl, {"Content": message[message.length - 1]}).pipe(
+      map((response: any) => {
+        return response.response
+      })
+    )
   }
   //mock method
   // getSuggestion(message: Message[]): Observable<string> {

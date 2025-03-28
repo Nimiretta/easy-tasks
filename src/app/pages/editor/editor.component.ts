@@ -6,6 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { TaskService } from '../../common/services/task.service';
 import { Task, TaskPriority } from '../../models/task.model';
+import { SpinnerService } from '../../common/services/spinner.service';
 
 @Component({
   selector: 'tc-editor',
@@ -28,9 +29,9 @@ export class EditorComponent implements OnDestroy {
     private taskService: TaskService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private spinnerService: SpinnerService,
   ) {
-    console.log(Object.values(TaskPriority));
     this.task = new Task();
     this.taskForm = this.fb.group({
       description: ['', Validators.required],
@@ -56,12 +57,14 @@ export class EditorComponent implements OnDestroy {
   }
 
   onSubmit(): void {
+    this.spinnerService.showSpinner()
     const task = Task.fromJSON(this.taskForm.value);
     if (this.isNew) {
       this.taskService
         .createTask(task)
         .pipe(takeUntil(this.ngUnsubscribe$))
         .subscribe(() => {
+          this.spinnerService.hideSpinner();
           this.router.navigate(['/tasks']);
         });
     } else {
@@ -69,6 +72,7 @@ export class EditorComponent implements OnDestroy {
         .updateTask(this.task.taskId, task)
         .pipe(takeUntil(this.ngUnsubscribe$))
         .subscribe(() => {
+          this.spinnerService.hideSpinner();
           this.router.navigate(['/tasks']);
         });
     }
