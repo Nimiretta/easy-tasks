@@ -33,12 +33,15 @@ import { SpinnerComponent } from './common/components/spinner/spinner.component'
       provide: HTTP_INTERCEPTORS,
       useFactory: (): HttpInterceptor => ({
         intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-          const clonedRequest = req.clone({
-            setHeaders: {
-              'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
-            },
-          });
-          return next.handle(clonedRequest);
+          if (localStorage.getItem('userToken')) {
+            const clonedRequest = req.clone({
+              setHeaders: {
+                'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+              },
+            });
+            return next.handle(clonedRequest);
+          }
+          return next.handle(req.clone());
         },
       }),
       multi: true,
