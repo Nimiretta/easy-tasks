@@ -54,6 +54,9 @@
 
 .tc-table-description {
   grid-area: desc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tc-table-description:hover {

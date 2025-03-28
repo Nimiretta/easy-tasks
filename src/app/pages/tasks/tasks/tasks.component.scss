@@ -10,17 +10,19 @@
   flex-direction: column;
   flex-flow: wrap;
   width: 100%;
-  gap: 1rem;
+  gap: 0.5rem;
 
   .tc-task {
     flex-grow: 1;
+    width: 100%;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .tc-tasks-container {
     .tc-task {
-      max-width: 50%;
+      max-width: 48%;
+      flex-grow: 1;
     }
   }
 }
@@ -117,7 +119,7 @@
   border: 1px $primary-dark solid;
   margin-top: 1rem;
   border-radius: 0.5rem;
-  padding: 0.5rem 3rem; 
+  padding: 0.5rem 3rem;
 }
 
 .tc-button-load-more:hover {

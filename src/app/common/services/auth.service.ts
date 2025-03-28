@@ -51,7 +51,7 @@ export class AuthService {
 
   isAuthenticated(): Observable<boolean> {
     return this.http
-      .post<{ valid: boolean; role: UserRole }>(this.apiUrl + '/validate/', {
+      .post<{ valid: boolean; role: UserRole }>(this.apiUrl + 'validate/', {
         access: localStorage.getItem('userToken'),
         refresh: localStorage.getItem('refresh'),
       })
