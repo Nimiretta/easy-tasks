@@ -22,17 +22,12 @@
       class="tc-tasks-table"
       [tasks]="tasks"
       *ngIf="!cardView"
-      (resolve)="onTaskResolved()"
+      (resolveEvent)="onTaskResolved()"
     >
     </tc-table>
     <div class="tc-button-container">
       <button class="tc-tasks-add-new-bt" (click)="onAddTask()">
         + Add new task
-      </button>
-    </div>
-    <div class="tc-button-load-more-container" *ngIf="loadMoreShow$ | async">
-      <button (click)="onLoadMore()" class="tc-button-load-more">
-        Load more
       </button>
     </div>
   </ng-container>
