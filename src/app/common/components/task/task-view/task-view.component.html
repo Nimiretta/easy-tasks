@@ -8,8 +8,8 @@
       <img src="../../../../assets/icons/pajamas_pencil.svg" />
     </button>
   </div>
-  <p class="tc-card-text">
-    {{ task?.description }}
+  <p class="tc-card-text"
+    [innerHtml]=md.render(task?.description)>
   </p>
   <div class="tc-card-priority">
     <div

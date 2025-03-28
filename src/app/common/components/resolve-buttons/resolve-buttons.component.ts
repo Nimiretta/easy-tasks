@@ -17,7 +17,7 @@ export class ResolveButtonsComponent {
 
   status = TaskStatus;
 
-  resolve(value: Exclude<TaskStatus, TaskStatus.Created>): void {
+  resolve(value: any): void {
     this.resolveEvent.emit(value);
   }
 

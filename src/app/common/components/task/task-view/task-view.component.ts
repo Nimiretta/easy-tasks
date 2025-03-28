@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task, TaskStatus } from '../../../../models/task.model';
 import { PriorityColorDirective } from '../../../directives/priority-color.directive';
 import { ResolveButtonsComponent } from '../../resolve-buttons/resolve-buttons.component';
+import markdownit from 'markdown-it'
 
 @Component({
   selector: 'tc-task-view[task]',
@@ -17,6 +18,7 @@ export class TaskViewComponent {
   @Input() page!: string;
   @Output() resolve = new EventEmitter<TaskStatus.Resolved | TaskStatus.Rejected>();
   @Output() edit = new EventEmitter<void>();
+  md = markdownit()
 
   status: typeof TaskStatus = TaskStatus;
 

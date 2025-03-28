@@ -1,7 +1,7 @@
 <ng-container>
   <nav class="tc-nav-container">
     <tc-logo></tc-logo>
-    <ul class="tc-nav-link-list-desk" *tcShowAuth="userRole$ | async">
+    <ul class="tc-nav-link-list-desk">
       <li routerLinkActive="tc-nav-active">
         <a [routerLink]="['/tasks']">List</a>
       </li>

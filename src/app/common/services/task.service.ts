@@ -10,7 +10,7 @@ import { QueryService } from './query.service';
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = `${environment.apiBaseUrl}tasks`;
+  private apiUrl = `${environment.apiBaseUrl}tasks/`;
   constructor(
     private http: HttpClient,
     private queryService: QueryService
@@ -27,14 +27,13 @@ export class TaskService {
       params.append('search', search);
     }
 
-    return this.http.get<{ paginationAmount: number; results: Task[] }>(this.apiUrl + `?${params.toString()}`).pipe(
-      map((r) => r.results),
+    return this.http.get<Task[]>(this.apiUrl + `?${params.toString()}`).pipe(
       map((results) => results.map(Task.fromJSON))
     );
   }
 
   getTaskById(id: string): Observable<Task> {
-    return this.http.get<Task>(this.apiUrl + `/${id}`).pipe(map(Task.fromJSON));
+    return this.http.get<Task>(this.apiUrl + `${id}`).pipe(map(Task.fromJSON));
   }
 
   createTask(task: Task): Observable<Task> {
@@ -42,10 +41,10 @@ export class TaskService {
   }
 
   updateTask(id: string, task: Task): Observable<Task> {
-    return this.http.patch<Task[]>(this.apiUrl + `/${id}`, task).pipe(map(Task.fromJSON));
+    return this.http.patch<Task[]>(this.apiUrl + `${id}`, task).pipe(map(Task.fromJSON));
   }
 
   deleteTask(id: string): Observable<void> {
-    return this.http.delete<void>(this.apiUrl + `/${id}`);
+    return this.http.delete<void>(this.apiUrl + `${id}/`);
   }
 }

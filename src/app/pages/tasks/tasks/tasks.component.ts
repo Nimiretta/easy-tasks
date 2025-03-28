@@ -6,6 +6,7 @@ import { QueryService } from '../../../common/services/query.service';
 import { SpinnerService } from '../../../common/services/spinner.service';
 import { TaskService } from '../../../common/services/task.service';
 import { Task } from '../../../models/task.model';
+import markdownit from 'markdown-it'
 
 @Component({
   selector: 'tc-tasks',

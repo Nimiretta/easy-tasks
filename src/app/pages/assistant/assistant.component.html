@@ -1,26 +1,6 @@
-<ng-container *ngIf="userRole$ | async as userRole">
+<ng-container>
   <div class="tc-assistant-page">
-    <div
-      class="tc-assistant-banner"
-      *ngIf="userRole !== role.Premium && userRole !== role.Mega"
-    >
-      <div class="tc-assistant-banner-text">
-        This is not available to you now. You can request access by clicking the
-        button below.
-      </div>
-      <button
-        *ngIf="userRole !== role.Requested"
-        class="tc-assistant-banner-bt"
-        (click)="onRequestAccess()"
-      >
-        Request Access
-      </button>
-      <div *tcAssistantRequested="userRole" class="tc-assistant-banner-text">
-        Your request has been sent. You will be notified when you get access.
-      </div>
-    </div>
-
-    <div class="tc-assistant-chat-window" *tcShowAssistant="userRole">
+    <div class="tc-assistant-chat-window">
       <div
         #messagesContainer
         class="messages"

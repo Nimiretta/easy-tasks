@@ -3,14 +3,14 @@
 .tc-card {
   box-shadow: 1px 4px 0.5rem 0px rgba(0, 0, 0, 0.25);
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 3rem;
   color: $dark-gray;
   min-width: 100%;
   min-height: 8rem;
 
   display: grid;
   grid-template-columns: 2fr 3fr 1fr;
-  grid-template-rows: 2fr 1fr;
+  //grid-template-rows: 2fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
     'text text edit'
@@ -40,6 +40,7 @@
 
   .tc-card-text {
     grid-area: text;
+    margin-bottom: 2rem;
   }
 
   .tc-card-priority {
@@ -54,7 +55,7 @@
       height: 9px;
       width: 9px;
     }
-    
+
     .tc-card-priority-text {
       font-weight: 400;
       padding-bottom: 0.1rem;
