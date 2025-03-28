@@ -16,8 +16,8 @@ export class FastPromptComponent {
 
   options: FastPrompt[] = [
     {
-      buttonName: 'In the grocery store',
-      prompt: "I'm in the grocery store right now, what can I do",
+      buttonName: 'I have a few minutes without laptop',
+      prompt: 'I have a few minutes without laptop right now, what can I do',
     },
     {
       buttonName: 'One hour of free time',
